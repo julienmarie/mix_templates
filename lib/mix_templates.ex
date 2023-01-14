@@ -705,9 +705,30 @@ end
     # so $$PROJECT_NAME$$ becomes $PROJECT_NAME$
     defp dest_file_name(name, assigns) do
       if name =~ ~r{\$\$PROJECT_NAME\$\$} do
-        String.replace(name,"$$PROJECT_NAME$$", "$PROJECT_NAME$")
+        String.replace(name, "$$PROJECT_NAME$$", "$PROJECT_NAME$")
       else
-        String.replace(name, "$PROJECT_NAME$", assigns[:assigns][:project_name])
+        if name =~ ~r{\$.*\$} do
+          nm = String.replace(name, "$", "")
+
+          if(name =~ ~r{\$.*\$\.ex}) do
+            assign =
+              nm
+              |> String.replace(".ex", "")
+              |> String.downcase()
+              |> String.to_atom()
+
+            String.replace(name, name, "#{assigns[:assigns][assign]}.ex")
+          else
+            assign =
+              nm
+              |> String.downcase()
+              |> String.to_atom()
+
+            String.replace(name, name, assigns[:assigns][assign])
+          end
+        else
+          String.replace(name, "$PROJECT_NAME$", assigns[:assigns][:project_name])
+        end
       end
     end
 
