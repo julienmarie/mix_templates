@@ -499,7 +499,7 @@ end
           true ->
             __DIR__
         end
-        |> Path.join("$PROJECT_NAME$")
+      #  |> Path.join("$PROJECT_NAME$")
       end
 
       @doc """
@@ -718,7 +718,6 @@ end
               |> String.to_atom()
 
             String.replace(name, name, "#{assigns[:assigns][assign]}.ex")
-            "#{assigns[:assigns][assign]}.ex"
           else
             assign =
               nm
