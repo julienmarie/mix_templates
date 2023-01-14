@@ -499,7 +499,7 @@ end
           true ->
             __DIR__
         end
-      #  |> Path.join("$PROJECT_NAME$")
+        |> Path.join("$PROJECT_NAME$")
       end
 
       @doc """
