@@ -718,6 +718,7 @@ end
               |> String.to_atom()
 
             String.replace(name, name, "#{assigns[:assigns][assign]}.ex")
+            "#{assigns[:assigns][assign]}.ex"
           else
             assign =
               nm
